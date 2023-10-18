@@ -4,17 +4,30 @@
 rgb_lcd lcd;
 const int ledPin_1 = 7; 
 const int ledPin_2 = 6; 
+const int colorR = 0;
+const int colorG = 0;
+const int colorB = 0;
+
 void setup() {
+// set up the LCD's number of columns and rows:
+    lcd.begin(16, 1);
+    lcd.setRGB(colorR, colorG, colorB);
+    lcd.print("Vacant");
   // initialize ledPin as an output.
     pinMode(ledPin_1, OUTPUT);
     pinMode(ledPin_2, OUTPUT);
+
 }
 
 void loop() {
-    delay(1000); 
+    delay(1000);
+    lcd.clear();
+    lcd.print("Occupant"); 
     digitalWrite(ledPin_2, LOW);
     digitalWrite(ledPin_1, HIGH);
     delay(1000);
+    lcd.clear();
+    lcd.print("Vacant");
     digitalWrite(ledPin_1, LOW);
     digitalWrite(ledPin_2, HIGH);
 }
