@@ -4,10 +4,10 @@
 rgb_lcd lcd;
 const int ledPin_1 = 7; 
 const int ledPin_2 = 6; 
-const int buzzer = 4       // Grove Buzzer connect to D4
-const int colorR = 255;
-const int colorG = 0;
-const int colorB = 0;
+const int buzzer = 4;
+const int colorR = 0;
+const int colorG = 255;
+const int colorB = 255;
 
 void setup() {
     // set up the LCD's number of columns and rows:
@@ -24,14 +24,16 @@ void loop() {
     delay(1000); 
     lcd.clear();
     lcd.print("Occupant");
-    noTone(buzzer);
     digitalWrite(ledPin_2, LOW);
     digitalWrite(ledPin_1, HIGH);
+    noTone(buzzer);
+    lcd.setRGB(255,0,0);
     delay(1000);
     lcd.clear();
     lcd.print("Vacant");
-    tone(buzzer, 1000);
+    tone(buzzer, 500, 500);
     digitalWrite(ledPin_1, LOW);
     digitalWrite(ledPin_2, HIGH);
+    lcd.setRGB(0,255,0);
 
 }
