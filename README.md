@@ -1,2 +1,2 @@
 # IoT-project
-Project based on Arduino.
+Purpose of the project is  
