@@ -13,7 +13,7 @@ void setup() {
     // set up the LCD's number of columns and rows:
     lcd.begin(16, 1);
     lcd.setRGB(colorR, colorG, colorB);
-    lcd.print("Vacant");
+    lcd.print("Start");
    // initialize ledPin as an output.
     pinMode(ledPin_1, OUTPUT);
     pinMode(ledPin_2, OUTPUT);
@@ -21,7 +21,7 @@ void setup() {
 }
 
 void loop() {
-    delay(1000); 
+    delay(5000); 
     lcd.clear();
     lcd.print("Occupant");
     digitalWrite(ledPin_2, LOW);
