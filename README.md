@@ -1,4 +1,8 @@
 # IoT-project - The RestRoom Status Light 
-Code starts with printing 'Start' on the Grove screen with aqua background. It includes delays and erasing previous word from the screen so other can show up.
-The main purpose of the project is to show people when the toilets are vacant and occupant. If it is available, one can see it on the display which says 'Vacant' with green background or as a green LED light and hear it, when the buzzer rings. In case it is not available, display has clear 'Occupied' statemnt with red background and red LED light. There is no sound of buzzer.
+Code starts with printing 'Start' on the Grove screen with aqua background.
+The main purpose of the project is to show people when the toilets are vacant or occupant.
+The trigger of the code is touch sensor, which we assume is located on the door frame.
+The moment the door closes it touches the sensor and other sensors react to it accordingly. Red LED light turns on, LCD screen displays "Occupant" with the red background. 
+When a door opens the buzzer rings to indicate that it is available. Moreover, LCD screen turns to green colour with "Vacant" sign and green LED light turns on.
+
 
