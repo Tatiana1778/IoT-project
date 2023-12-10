@@ -14,14 +14,11 @@ const int SENSOR_PIN = 5;       // the Arduino's input pin that connects to the 
 // Variables will change:
 int lastState = LOW;  // the previous state from the input pin
 int currentState;     // the current reading from the input pin
-char LED_color[10];
 char devid[] = "v797C579A35FABD4";
-
 char serverName[] = "api.pushingbox.com";
 boolean DEBUG = true;
 #include <Bridge.h>
 #include <HttpClient.h>
-
 
 void setup() {
     Bridge.begin();
@@ -35,7 +32,6 @@ void setup() {
     pinMode(buzzer,OUTPUT);//initialize the buzzer pin as an output
     pinMode(touch_sensor, INPUT);
     // initialize serial communication at 9600 bits per second:
-
     pinMode(SENSOR_PIN, INPUT);
     Serial.begin(9600);
     // initialize the Arduino's pin as aninput
@@ -45,8 +41,10 @@ void setup() {
 
 void loop() {
     // Initialize the client library
-
+  String APIRequest;
+  HttpClient client;
   currentState = digitalRead(SENSOR_PIN);
+
   if(lastState == LOW && currentState == HIGH) {
     lcd.clear();
     Serial.println("The sensor is pressed");
@@ -54,9 +52,9 @@ void loop() {
     digitalWrite(ledPin_2, LOW);
     digitalWrite(ledPin_1, HIGH);
     noTone(buzzer);
-    strcpy(LED_color, "Red");
     lcd.setRGB(255,0,0);
-
+    APIRequest = String(serverName) + "/pushingbox?devid=" + String(devid)+"&State_of_touch_sensor=pressed&LED=Red";
+    client.get (APIRequest);
     }
 
   else if(lastState == HIGH && currentState == LOW) {
@@ -66,17 +64,9 @@ void loop() {
     tone(buzzer, 500, 500);
     digitalWrite(ledPin_1, LOW);
     digitalWrite(ledPin_2, HIGH);
-    strcpy(LED_color, "Green"); 
     lcd.setRGB(0,255,0);
-
+    //APIRequest = String(serverName) + "/pushingbox?devid=" + String(devid)+"&State_of_touch_sensor=released&LED=Green";
+    //client.get (APIRequest);
         }
-
-    // read the state of the the input pin:
-    // Make a HTTP request:  ?State_of_touch_sensor=pressed&LED=$LED_color$
-  String APIRequest;
-  APIRequest = String(serverName) + "/pushingbox?devid=" + String(devid)+"&State_of_touch_sensor=pressed&LED="+LED_color;
-  HttpClient client;
-  client.get (APIRequest);
-
   lastState = currentState;
 }
